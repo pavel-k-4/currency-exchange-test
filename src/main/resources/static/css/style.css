@@ -24,7 +24,7 @@ th {
 td {
     border: black solid 2px;
 }
-div.button-convert {
+div#button-convert {
     border: black 2px;
     border-radius: 2px;
     background-color: lightslategray;

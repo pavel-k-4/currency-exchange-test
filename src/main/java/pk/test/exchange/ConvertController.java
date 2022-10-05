@@ -1,5 +1,6 @@
 package pk.test.exchange;
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,7 +16,7 @@ public class ConvertController {
         this.convertService = convertService;
     }
 
-    @PostMapping("/convert")
+    @PostMapping(value = "/convert", produces = MediaType.TEXT_PLAIN_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public String convert(@RequestBody ConvertDto convertDto) {
         var targetValue = convertService.convert(convertDto);
         return (targetValue != null) ? targetValue.toString() : "";

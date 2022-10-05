@@ -36,7 +36,7 @@ public class ConvertService {
             log.info("updating the rates");
             updateRateService.update();
             initial = rateRepository.findByCurrencyIdToday(convertDto.getInitialCurrency());
-            target = rateRepository.findByCurrencyIdToday(convertDto.getInitialCurrency());
+            target = rateRepository.findByCurrencyIdToday(convertDto.getTargetCurrency());
         }
 
         if (initial.isEmpty() || target.isEmpty()) {
