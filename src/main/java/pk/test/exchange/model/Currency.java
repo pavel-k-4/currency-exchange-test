@@ -25,6 +25,10 @@ public class Currency {
         this.name = name;
     }
 
+    public String toSimpleString() {
+        return "%s (%s)".formatted(charCode, name);
+    }
+
     public String getId() {
         return id;
     }

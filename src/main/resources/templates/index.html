@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Конвертер</title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css(v=${#dates.createNow()})}">
+</head>
+<body>
+    <main>
+        <section>
+            <h1>Конвертер</h1>
+            <div class="action-line">
+                <div class="action">
+                    <div style="background-color: aqua">
+                        <label for="initial-cur" hidden>Исходная валюта:</label>
+                        <select name="initial-cur" id="initial-cur">
+                            <option th:each="cur : ${currencies.entrySet()}"
+                                    th:value="${cur.key}"
+                                    th:text="${cur.value}">USD (Доллар США)</option>
+                        </select>
+                    </div>
+                    <div style="background-color: teal">
+                        <label for="initial-val" hidden>Исходная сумма:</label>
+                        <input type="text" id="initial-val">
+                    </div>
+                </div>
+                <div class="action">
+                    <div style="background-color: red">
+                        <label for="target-cur" hidden>Целевая валюта:</label>
+                        <select name="target-cur" id="target-cur">
+                            <option th:each="cur : ${currencies.entrySet()}"
+                                    th:value="${cur.key}"
+                                    th:text="${cur.value}">RUB (Российский рубль)</option>
+                        </select>
+                    </div>
+                    <div style="background-color: teal">
+                        <label for="target-val" hidden>Целевая сумма:</label>
+                        <input type="text" id="target-val">
+                    </div>
+                </div>
+            </div>
+            <div class="button-convert">Конвертировать</div>
+        </section>
+        <section>
+            <h2>История</h2>
+            <table>
+                <tr>
+                    <th>Исходная валюта</th>
+                    <th>Целевая валюта</th>
+                    <th>Исходная сумма</th>
+                    <th>Целевая сумма</th>
+                    <th>Дата</th>
+                </tr>
+                <tr th:each="entry : ${history}">
+                    <td th:text="${entry.getInitialCurrency().toSimpleString()}">USD (Доллар США)</td>
+                    <td th:text="${entry.getTargetCurrency().toSimpleString()}">RUB (Российский рубль)</td>
+                    <td th:text="${entry.getInitialValue()}">1</td>
+                    <td th:text="${entry.getTargetValue()}">27.63</td>
+                    <td th:text="${entry.getDate()}">12.06.2007</td>
+                </tr>
+            </table>
+        </section>
+    </main>
+    </body>
+</html>

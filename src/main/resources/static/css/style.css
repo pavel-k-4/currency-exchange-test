@@ -1,0 +1,36 @@
+div.action-line div.action {
+    display: inline-block;
+    margin: 2px auto;
+    padding: 10px;
+}
+div.action-line {
+    width: 100%;
+    margin: auto;
+}
+
+body {
+    width: 60%;
+    margin: auto;
+}
+
+main {
+    margin: 5px 0 10px;
+}
+
+th {
+    border: black solid 2px;
+    background-color: lightslategray;
+}
+td {
+    border: black solid 2px;
+}
+div.button-convert {
+    border: black 2px;
+    border-radius: 2px;
+    background-color: lightslategray;
+    padding: 10px;
+}
+
+div.button-convert:hover {
+    background-color: lightgray;
+}
