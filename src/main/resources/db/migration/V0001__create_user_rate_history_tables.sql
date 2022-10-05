@@ -16,12 +16,12 @@ CREATE TABLE IF NOT EXISTS "rate" (
     "currency_id" VARCHAR(8) REFERENCES "currency"("cbr_id"),
     "nominal" INT,
     "value" NUMERIC(10, 4),
-    "date" DATE NOT NULL
+    "date" DATE DEFAULT NOW()
 );
 INSERT INTO "currency"("cbr_id", "num_code", "char_code", "name")
 	VALUES ('na~rub', 643, 'RUB', 'Российский рубль'); --isn't a foreign currency
 INSERT INTO "rate"("currency_id", "nominal", "value", "date")
-    VALUES ('na~rub', 1, 1, NOW()); --ruble is equal to itself
+    VALUES ('na~rub', 1, 1, NULL); --ruble is equal to itself and it's always valid
 
 CREATE TABLE IF NOT EXISTS "history" (
     "id" SERIAL PRIMARY KEY,
