@@ -42,7 +42,7 @@ public class ConvertService {
         if (initial.isEmpty() || target.isEmpty()) {
             log.error("could not find today's rates for {} and {} even after retry",
                     convertDto.getInitialCurrency(),
-                    convertDto.getInitialCurrency());
+                    convertDto.getTargetCurrency());
             return null;
         }
 

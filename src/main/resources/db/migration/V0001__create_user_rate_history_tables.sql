@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS "history" (
     "target_currency_id" VARCHAR(8) REFERENCES "currency"("cbr_id"),
     "initial_value" NUMERIC(16, 4),
     "target_value" NUMERIC(16, 4),
-    "date" DATE
+    "date" DATE NOT NULL DEFAULT NOW()
 );
 CREATE INDEX idx_history_by_user ON "history" USING HASH ("user_id");
 CREATE INDEX idx_history_by_date ON "history"("date");

@@ -1,11 +1,16 @@
 package pk.test.exchange.model;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.GenerationTime;
+
+import javax.annotation.processing.Generated;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "history")
+@DynamicInsert
 public class History {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +37,6 @@ public class History {
         this.targetCurrency = targetCurrency;
         this.initialValue = initialValue;
         this.targetValue = targetValue;
-        this.date = LocalDate.now();
     }
 
     public Long getId() {
