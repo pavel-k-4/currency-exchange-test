@@ -1,12 +1,14 @@
-const activate = () => document.getElementById("button-convert").onclick = check;
+const activate = () => {
+    document.getElementById("button-convert").onclick = convert;
+    document.getElementById("button-search").onclick = search;
+};
 function showError() {
     document.getElementById("target-val").value = "";
     let input = document.getElementById("initial-val")
     input.classList.add("error")
     setTimeout(() => input.classList.remove("error"), 500);
 }
-const makeCall = async (dto, names) => {
-
+const makeConvertCall = async (dto, names) => {
     const token = document.querySelector("meta[name='_csrf']").content;
     const response = await fetch("/convert", {
         method: 'POST',
@@ -37,19 +39,33 @@ const makeCall = async (dto, names) => {
     });
 }
 
+const makeSearchCall = async (date) => {
+    const token = document.querySelector("meta[name='_csrf']").content;
+    const response = await fetch('/history?' + new URLSearchParams({ 'd': date }), {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'text/plain',
+            'X-CSRF-TOKEN': token
+        }
+    });
+
+    return response.json()
+}
+
 function getSelectedText(id) {
     let select = document.getElementById(id)
     return select.options[select.selectedIndex].text
 }
 
-const check = () => {
+const convert = () => {
     let dto = {
         "initialCurrency": document.getElementById("initial-cur").value,
         "targetCurrency": document.getElementById("target-cur").value,
         "initialValue": document.getElementById("initial-val").value
     };
     if (dto.initialValue) {
-        makeCall(dto, {
+        makeConvertCall(dto, {
             "initialName": getSelectedText("initial-cur"),
             "targetName": getSelectedText("target-cur")
         }).then(() => activate())
@@ -57,4 +73,18 @@ const check = () => {
         activate()
     }
 };
+
+const search = () => {
+    let date = document.getElementById("search-date").value
+    if (!date) {
+        return activate();
+    }
+    makeSearchCall(date)
+        .then((dto) => {
+            console.log(dto);
+            let cancel = document.getElementById("button-search-cancel")
+            cancel.hidden = false
+        })
+        .then(() => activate())
+}
 activate()

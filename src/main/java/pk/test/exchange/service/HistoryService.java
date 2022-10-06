@@ -17,6 +17,7 @@ import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Service
 @Transactional
@@ -45,15 +46,23 @@ public class HistoryService {
         ));
     }
 
+    public HistoryEntriesDto generateForCurrentUser() {
+        List<History> history = historyRepository.findAllByUserOrderByDateDesc(getCurrentUser());
+        return transformToDto(history);
+    }
 
     public HistoryEntriesDto generateForCurrentUserAndDate(String d) {
-        LocalDate date = LocalDate.parse(d, formatter);
+        LocalDate date = LocalDate.parse(d, DateTimeFormatter.ISO_DATE);
         var currentUser =  getCurrentUser();
-        var entries = historyRepository.findAllByUserAndDateOrderByDateDesc(
+        var history = historyRepository.findAllByUserAndDateOrderByDateDesc(
                 currentUser,
                 date
         );
-        var entryDtos = entries.stream().map(entry ->
+        return transformToDto(history);
+    }
+
+    private HistoryEntriesDto transformToDto(List<History> history) {
+        var entryDtos = history.stream().map(entry ->
                 new HistoryEntriesDto.HistoryEntryDto(
                         new HistoryEntriesDto.HistoryEntryDto.CurrencyDto(
                                 entry.getInitialCurrency().getCharCode(),

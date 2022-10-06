@@ -1,0 +1,1 @@
+CREATE INDEX idx_history_by_date_only ON history USING HASH(("date"::DATE));
