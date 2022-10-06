@@ -7,7 +7,9 @@ div.action-line {
     width: 100%;
     margin: auto;
 }
-
+div.action-line div.action div:first-child {
+    margin-bottom: 8px;
+}
 body {
     min-width: 60%;
     max-width: 80%;
@@ -18,22 +20,11 @@ main {
     margin: 5px 0 10px;
 }
 
-th {
-    border: black solid 1px;
-    background-color: #9cadb8;
-}
-td {
-    border: black solid 1px;
-    background-color: #eceff1;
-}
 
 input.error {
     background-color: pink;
 }
 
-th, td {
-    padding: 3px;
-}
 
 input, select {
     padding: 4px;

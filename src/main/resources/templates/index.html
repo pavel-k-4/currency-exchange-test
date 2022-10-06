@@ -10,12 +10,12 @@
 </head>
 <body>
     <main>
-        <section>
+        <section class="form-group">
             <h1>Конвертер</h1>
             <div class="action-line">
                 <div class="action">
                     <div>
-                        <label for="initial-cur" hidden>Исходная валюта:</label>
+                        <label for="initial-cur">Исходная валюта:</label>
                         <select name="initial-cur" id="initial-cur" class="form-control ">
                             <option th:each="cur : ${currencies.entrySet()}"
                                     th:value="${cur.key}"
@@ -23,13 +23,13 @@
                         </select>
                     </div>
                     <div>
-                        <label for="initial-val" hidden>Исходная сумма:</label>
+                        <label for="initial-val">Исходная сумма:</label>
                         <input type="text" id="initial-val" class="form-control">
                     </div>
                 </div>
                 <div class="action">
                     <div>
-                        <label for="target-cur" hidden>Целевая валюта:</label>
+                        <label for="target-cur">Целевая валюта:</label>
                         <select name="target-cur" id="target-cur" class="form-control">
                             <option th:each="cur : ${currencies.entrySet()}"
                                     th:value="${cur.key}"
@@ -37,30 +37,36 @@
                         </select>
                     </div>
                     <div>
-                        <label for="target-val" hidden>Целевая сумма:</label>
+                        <label for="target-val">Результат: </label>
                         <input type="text" id="target-val" class="form-control" disabled>
                     </div>
                 </div>
             </div>
-            <div id="button-convert" class="btn-secondary btn-lg">Конвертировать</div>
+            <div>
+                <div id="button-convert" class="btn-secondary btn-lg">Конвертировать</div>
+            </div>
         </section>
         <section>
             <h2>История</h2>
-            <table id="history-table">
-                <tr>
-                    <th>Исходная валюта</th>
-                    <th>Целевая валюта</th>
-                    <th>Исходная сумма</th>
-                    <th>Целевая сумма</th>
-                    <th>Дата</th>
-                </tr>
-                <tr th:each="entry : ${history}">
-                    <td th:text="${entry.getInitialCurrency().toSimpleString()}">USD (Доллар США)</td>
-                    <td th:text="${entry.getTargetCurrency().toSimpleString()}">RUB (Российский рубль)</td>
-                    <td th:text="${T(pk.test.exchange.util.BigDecimalUtils).format(entry.getInitialValue())}">1</td>
-                    <td th:text="${T(pk.test.exchange.util.BigDecimalUtils).format(entry.getTargetValue())}">27.63</td>
-                    <td th:text="${#temporals.format(entry.getDate(), 'dd.MM.yyyy')}">12.06.2007</td>
-                </tr>
+            <table id="history-table" class="table table-bordered">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Исходная валюта</th>
+                        <th>Целевая валюта</th>
+                        <th>Исходная сумма</th>
+                        <th>Целевая сумма</th>
+                        <th>Дата</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="entry : ${history}">
+                        <td th:text="${entry.getInitialCurrency().toSimpleString()}">USD (Доллар США)</td>
+                        <td th:text="${entry.getTargetCurrency().toSimpleString()}">RUB (Российский рубль)</td>
+                        <td th:text="${T(pk.test.exchange.util.BigDecimalUtils).format(entry.getInitialValue())}">1</td>
+                        <td th:text="${T(pk.test.exchange.util.BigDecimalUtils).format(entry.getTargetValue())}">27.63</td>
+                        <td th:text="${#temporals.format(entry.getDate(), 'dd.MM.yyyy')}">12.06.2007</td>
+                    </tr>
+                </tbody>
             </table>
         </section>
     </main>
