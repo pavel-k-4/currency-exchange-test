@@ -1,6 +1,6 @@
 div.action-line div.action {
     display: inline-block;
-    margin: 2px auto;
+    margin: 10px auto;
     padding: 10px;
 }
 div.action-line {
@@ -18,22 +18,23 @@ main {
 }
 
 th {
-    border: black solid 2px;
-    background-color: lightslategray;
+    border: black solid 1px;
+    background-color: #9cadb8;
 }
 td {
-    border: black solid 2px;
+    border: black solid 1px;
+    background-color: #eceff1;
 }
 div#button-convert {
     border: black 2px;
     border-radius: 2px;
-    background-color: lightslategray;
-    color: white;
+    background-color: #9cadb8;
+    color: black;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 20px;
     margin: 0 auto;
     cursor: pointer;
 }
@@ -49,3 +50,12 @@ input.error {
 th, td {
     padding: 3px;
 }
+
+input, select {
+    padding: 4px;
+}
+input {
+    width: 100%;
+    box-sizing: border-box;
+}
+

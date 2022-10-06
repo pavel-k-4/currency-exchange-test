@@ -1,4 +1,10 @@
 const activate = () => document.getElementById("button-convert").onclick = check;
+function showError() {
+    document.getElementById("target-val").value = "";
+    let input = document.getElementById("initial-val")
+    input.classList.add("error")
+    setTimeout(() => input.classList.remove("error"), 500);
+}
 const makeCall = async (dto, names) => {
 
     const token = document.querySelector("meta[name='_csrf']").content;
@@ -14,6 +20,10 @@ const makeCall = async (dto, names) => {
 
     response.text().then(data => {
         console.log(data);
+        if (!data) {
+            showError();
+            return;
+        }
         document.getElementById("target-val").value = data;
         let table = document.getElementById("history-table")
         let row = table.insertRow(1);
@@ -23,10 +33,7 @@ const makeCall = async (dto, names) => {
         row.insertCell(3).innerHTML = data
         row.insertCell(4).innerHTML = "только что"
     }, () => {
-        document.getElementById("target-val").value = "";
-        let input = document.getElementById("initial-val")
-        input.classList.add("error")
-        setTimeout(() => input.classList.remove("error"), 500);
+        showError();
     });
 }
 

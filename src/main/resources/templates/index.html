@@ -13,7 +13,7 @@
             <h1>Конвертер</h1>
             <div class="action-line">
                 <div class="action">
-                    <div style="background-color: aqua">
+                    <div>
                         <label for="initial-cur" hidden>Исходная валюта:</label>
                         <select name="initial-cur" id="initial-cur">
                             <option th:each="cur : ${currencies.entrySet()}"
@@ -21,13 +21,13 @@
                                     th:text="${cur.value}">USD (Доллар США)</option>
                         </select>
                     </div>
-                    <div style="background-color: teal">
+                    <div>
                         <label for="initial-val" hidden>Исходная сумма:</label>
                         <input type="text" id="initial-val">
                     </div>
                 </div>
                 <div class="action">
-                    <div style="background-color: red">
+                    <div>
                         <label for="target-cur" hidden>Целевая валюта:</label>
                         <select name="target-cur" id="target-cur">
                             <option th:each="cur : ${currencies.entrySet()}"
@@ -35,7 +35,7 @@
                                     th:text="${cur.value}">RUB (Российский рубль)</option>
                         </select>
                     </div>
-                    <div style="background-color: teal">
+                    <div>
                         <label for="target-val" hidden>Целевая сумма:</label>
                         <input type="text" id="target-val" disabled>
                     </div>

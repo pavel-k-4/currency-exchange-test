@@ -21,6 +21,7 @@ import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 
 @Service
 @Transactional
@@ -59,8 +60,8 @@ public class UpdateRateService {
             log.error("Cannot parse date {}", response.getDate(), e);
             throw new RestClientException("Object from " + url + " cannot be parsed, try rebuilding the app.");
         }
-        response.getValute().forEach(currencyRate -> {
-            var currency = currencyRepository.findById(currencyRate.getID()).orElse(
+        List<Rate> incomingRates = response.getValute().stream().map(currencyRate -> {
+            var currency = currencyRepository.findById(currencyRate.getID()).orElseGet(() ->
                     currencyRepository.save(new Currency(
                             currencyRate.getID(),
                             currencyRate.getNumCode(),
@@ -75,14 +76,14 @@ public class UpdateRateService {
                 log.error("Cannot parse number {}", currencyRate.getValue(), e);
                 throw new RestClientException("Object from " + url + " cannot be parsed, try rebuilding the app.");
             }
-            var rate = new Rate(
+            return new Rate(
                     currency,
                     currencyRate.getNominal(),
                     value,
                     date
             );
-            rateRepository.save(rate);
-        });
+        }).toList();
+        rateRepository.saveAll(incomingRates);
     }
 
 }
