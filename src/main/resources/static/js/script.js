@@ -16,7 +16,7 @@ const makeCall = async (dto, names) => {
         console.log(data);
         document.getElementById("target-val").value = data;
         let table = document.getElementById("history-table")
-        let row = table.insertRow(-1);
+        let row = table.insertRow(1);
         row.insertCell(0).innerHTML = names.initialName
         row.insertCell(1).innerHTML = names.targetName
         row.insertCell(2).innerHTML = dto.initialValue
