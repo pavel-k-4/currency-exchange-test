@@ -6,6 +6,7 @@
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <title>Конвертер</title>
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css(v=${#dates.createNow()})}">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
 </head>
 <body>
     <main>
@@ -15,7 +16,7 @@
                 <div class="action">
                     <div>
                         <label for="initial-cur" hidden>Исходная валюта:</label>
-                        <select name="initial-cur" id="initial-cur">
+                        <select name="initial-cur" id="initial-cur" class="form-control ">
                             <option th:each="cur : ${currencies.entrySet()}"
                                     th:value="${cur.key}"
                                     th:text="${cur.value}">USD (Доллар США)</option>
@@ -23,13 +24,13 @@
                     </div>
                     <div>
                         <label for="initial-val" hidden>Исходная сумма:</label>
-                        <input type="text" id="initial-val">
+                        <input type="text" id="initial-val" class="form-control">
                     </div>
                 </div>
                 <div class="action">
                     <div>
                         <label for="target-cur" hidden>Целевая валюта:</label>
-                        <select name="target-cur" id="target-cur">
+                        <select name="target-cur" id="target-cur" class="form-control">
                             <option th:each="cur : ${currencies.entrySet()}"
                                     th:value="${cur.key}"
                                     th:text="${cur.value}">RUB (Российский рубль)</option>
@@ -37,11 +38,11 @@
                     </div>
                     <div>
                         <label for="target-val" hidden>Целевая сумма:</label>
-                        <input type="text" id="target-val" disabled>
+                        <input type="text" id="target-val" class="form-control" disabled>
                     </div>
                 </div>
             </div>
-            <div id="button-convert">Конвертировать</div>
+            <div id="button-convert" class="btn-secondary btn-lg">Конвертировать</div>
         </section>
         <section>
             <h2>История</h2>
@@ -64,5 +65,8 @@
         </section>
     </main>
     <script th:src="@{/js/script.js(v=${#dates.createNow()})}"></script>
+    <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
     </body>
 </html>

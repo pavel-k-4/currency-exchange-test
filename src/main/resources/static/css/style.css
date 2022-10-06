@@ -9,8 +9,9 @@ div.action-line {
 }
 
 body {
-    width: 60%;
-    margin: auto;
+    min-width: 60%;
+    max-width: 80%;
+    margin: auto!important;
 }
 
 main {
@@ -24,23 +25,6 @@ th {
 td {
     border: black solid 1px;
     background-color: #eceff1;
-}
-div#button-convert {
-    border: black 2px;
-    border-radius: 2px;
-    background-color: #9cadb8;
-    color: black;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 20px;
-    margin: 0 auto;
-    cursor: pointer;
-}
-
-div#button-convert:hover {
-    background-color: lightgray;
 }
 
 input.error {
