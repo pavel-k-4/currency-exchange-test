@@ -2,6 +2,7 @@ package pk.test.exchange.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -21,7 +22,19 @@ public class History {
     private Currency targetCurrency;
     private BigDecimal initialValue;
     private BigDecimal targetValue;
-    private Date date;
+    private LocalDate date;
+
+    public History() {
+    }
+
+    public History(User user, Currency initialCurrency, Currency targetCurrency, BigDecimal initialValue, BigDecimal targetValue) {
+        this.user = user;
+        this.initialCurrency = initialCurrency;
+        this.targetCurrency = targetCurrency;
+        this.initialValue = initialValue;
+        this.targetValue = targetValue;
+        this.date = LocalDate.now();
+    }
 
     public Long getId() {
         return id;
@@ -71,11 +84,11 @@ public class History {
         this.targetValue = targetValue;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 }

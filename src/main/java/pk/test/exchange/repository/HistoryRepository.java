@@ -7,5 +7,5 @@ import pk.test.exchange.model.User;
 import java.util.List;
 
 public interface HistoryRepository extends CrudRepository<History, Long> {
-    List<History> findAllByUserOrderByDate(User user);
+    List<History> findAllByUserOrderByDateDesc(User user);
 }

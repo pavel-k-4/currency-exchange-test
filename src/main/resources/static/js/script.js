@@ -13,6 +13,11 @@ const makeCall = async (dto) => {
 
     response.json().then(data => {
         document.getElementById("target-val").value = data;
+    }, () => {
+        document.getElementById("target-val").value = "";
+        let input = document.getElementById("initial-val")
+        input.classList.add("error")
+        setTimeout(() => input.classList.remove("error"), 500);
     });
 }
 

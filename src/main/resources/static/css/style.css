@@ -28,9 +28,20 @@ div#button-convert {
     border: black 2px;
     border-radius: 2px;
     background-color: lightslategray;
-    padding: 10px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0 auto;
+    cursor: pointer;
 }
 
-div.button-convert:hover {
+div#button-convert:hover {
     background-color: lightgray;
+}
+
+input.error {
+    background-color: pink;
 }

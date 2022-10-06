@@ -35,7 +35,7 @@ public class IndexController {
 
 
         var userDetails = (PostgresUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        List<History> history = historyRepository.findAllByUserOrderByDate(userDetails.toUser());
+        List<History> history = historyRepository.findAllByUserOrderByDateDesc(userDetails.toUser());
         model.addAttribute("history", history);
 
         return "index";
