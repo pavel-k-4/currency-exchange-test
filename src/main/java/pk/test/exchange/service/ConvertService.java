@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import pk.test.exchange.dto.ConvertDto;
 import pk.test.exchange.model.Rate;
 import pk.test.exchange.repository.RateRepository;
-import pk.test.exchange.util.BigDecimalParser;
+import pk.test.exchange.util.BigDecimalUtils;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -48,7 +48,7 @@ public class ConvertService {
 
         BigDecimal value;
         try {
-            value = BigDecimalParser.parse(convertDto.getInitialValue());
+            value = BigDecimalUtils.parse(convertDto.getInitialValue());
         } catch (ParseException e) {
             log.warn("couldn't parse {}", convertDto.getInitialValue(), e);
             return null;

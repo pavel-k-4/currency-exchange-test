@@ -45,7 +45,7 @@
         </section>
         <section>
             <h2>История</h2>
-            <table>
+            <table id="history-table">
                 <tr>
                     <th>Исходная валюта</th>
                     <th>Целевая валюта</th>
@@ -56,9 +56,9 @@
                 <tr th:each="entry : ${history}">
                     <td th:text="${entry.getInitialCurrency().toSimpleString()}">USD (Доллар США)</td>
                     <td th:text="${entry.getTargetCurrency().toSimpleString()}">RUB (Российский рубль)</td>
-                    <td th:text="${entry.getInitialValue()}">1</td>
-                    <td th:text="${entry.getTargetValue()}">27.63</td>
-                    <td th:text="${entry.getDate()}">12.06.2007</td>
+                    <td th:text="${T(pk.test.exchange.util.BigDecimalUtils).format(entry.getInitialValue())}">1</td>
+                    <td th:text="${T(pk.test.exchange.util.BigDecimalUtils).format(entry.getTargetValue())}">27.63</td>
+                    <td th:text="${#temporals.format(entry.getDate(), 'dd.MM.yyyy')}">12.06.2007</td>
                 </tr>
             </table>
         </section>

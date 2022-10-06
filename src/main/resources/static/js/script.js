@@ -1,5 +1,5 @@
 const activate = () => document.getElementById("button-convert").onclick = check;
-const makeCall = async (dto) => {
+const makeCall = async (dto, names) => {
 
     const token = document.querySelector("meta[name='_csrf']").content;
     const response = await fetch("/convert", {
@@ -12,7 +12,15 @@ const makeCall = async (dto) => {
     });
 
     response.json().then(data => {
+        console.log(data);
         document.getElementById("target-val").value = data;
+        let table = document.getElementById("history-table")
+        let row = table.insertRow(-1);
+        row.insertCell(0).innerHTML = names.initialName
+        row.insertCell(1).innerHTML = names.targetName
+        row.insertCell(2).innerHTML = dto.initialValue
+        row.insertCell(3).innerHTML = data
+        row.insertCell(4).innerHTML = "только что"
     }, () => {
         document.getElementById("target-val").value = "";
         let input = document.getElementById("initial-val")
@@ -21,6 +29,10 @@ const makeCall = async (dto) => {
     });
 }
 
+function getSelectedText(id) {
+    let select = document.getElementById(id)
+    return select.options[select.selectedIndex].text
+}
 
 const check = () => {
     let dto = {
@@ -29,7 +41,10 @@ const check = () => {
         "initialValue": document.getElementById("initial-val").value
     };
     if (dto.initialValue) {
-        makeCall(dto).then(() => activate())
+        makeCall(dto, {
+            "initialName": getSelectedText("initial-cur"),
+            "targetName": getSelectedText("target-cur")
+        }).then(() => activate())
     } else {
         activate()
     }

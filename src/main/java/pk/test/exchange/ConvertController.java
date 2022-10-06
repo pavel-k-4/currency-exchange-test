@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pk.test.exchange.dto.ConvertDto;
 import pk.test.exchange.service.ConvertService;
 import pk.test.exchange.service.HistoryService;
+import pk.test.exchange.util.BigDecimalUtils;
 
 import javax.transaction.Transactional;
 
@@ -26,6 +27,6 @@ public class ConvertController {
     public String convert(@RequestBody ConvertDto convertDto) {
         var targetValue = convertService.convert(convertDto);
         historyService.log(convertDto, targetValue);
-        return (targetValue != null) ? targetValue.toString() : "";
+        return (targetValue != null) ? BigDecimalUtils.format(targetValue) : "";
     }
 }

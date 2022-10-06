@@ -12,7 +12,7 @@ import pk.test.exchange.model.Currency;
 import pk.test.exchange.model.Rate;
 import pk.test.exchange.repository.CurrencyRepository;
 import pk.test.exchange.repository.RateRepository;
-import pk.test.exchange.util.BigDecimalParser;
+import pk.test.exchange.util.BigDecimalUtils;
 
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
@@ -70,7 +70,7 @@ public class UpdateRateService {
             );
             BigDecimal value;
             try {
-                value = BigDecimalParser.parse(currencyRate.getValue());
+                value = BigDecimalUtils.parse(currencyRate.getValue());
             } catch (ParseException e) {
                 log.error("Cannot parse number {}", currencyRate.getValue(), e);
                 throw new RestClientException("Object from " + url + " cannot be parsed, try rebuilding the app.");
