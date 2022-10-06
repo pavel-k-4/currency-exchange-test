@@ -1,7 +1,7 @@
 div.action-line div.action {
     display: inline-block;
     margin: 10px auto;
-    padding: 10px;
+    padding: 0 10px;
 }
 div.action-line {
     width: 100%;
@@ -11,20 +11,23 @@ div.action-line div.action div:first-child {
     margin-bottom: 8px;
 }
 body {
-    min-width: 60%;
-    max-width: 80%;
+    min-width: 500px;
+    max-width: 1200px!important;
     margin: auto!important;
 }
 
 main {
     margin: 5px 0 10px;
 }
-
+table.table {
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 98%;
+}
 
 input.error {
     background-color: pink;
 }
-
 
 input, select {
     padding: 4px;
@@ -33,4 +36,12 @@ input {
     width: 100%;
     box-sizing: border-box;
 }
+header {
+    height: 70px;
+}
 
+@media (max-width: 1000px) {
+    a.curr-hint {
+        display: none;
+    }
+}

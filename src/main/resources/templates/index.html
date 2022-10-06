@@ -9,6 +9,7 @@
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
 </head>
 <body>
+    <header></header>
     <main>
         <section class="form-group">
             <h1>Конвертер</h1>
@@ -42,13 +43,15 @@
                     </div>
                 </div>
             </div>
-            <div>
-                <div id="button-convert" class="btn-secondary btn-lg">Конвертировать</div>
+            <div class="action-line">
+                <div class="action">
+                    <div id="button-convert" class="btn btn-secondary btn-lg">Конвертировать</div>
+                </div>
             </div>
         </section>
         <section>
-            <h2>История</h2>
-            <table id="history-table" class="table table-bordered">
+            <h1>История</h1>
+            <table id="history-table" class="table table-bordered table-hover">
                 <thead class="thead-light">
                     <tr>
                         <th>Исходная валюта</th>
@@ -60,8 +63,14 @@
                 </thead>
                 <tbody>
                     <tr th:each="entry : ${history}">
-                        <td th:text="${entry.getInitialCurrency().toSimpleString()}">USD (Доллар США)</td>
-                        <td th:text="${entry.getTargetCurrency().toSimpleString()}">RUB (Российский рубль)</td>
+                        <td>
+                            <a th:text="${entry.getInitialCurrency().getCharCode()}">USD</a>
+                            <a th:text="${entry.getInitialCurrency().getHint()}" class="curr-hint">(Доллар США)</a>
+                        </td>
+                        <td>
+                            <a th:text="${entry.getTargetCurrency().getCharCode()}">RUB</a>
+                            <a th:text="${entry.getTargetCurrency().getHint()}" class="curr-hint">(Российский рубль)</a>
+                        </td>
                         <td th:text="${T(pk.test.exchange.util.BigDecimalUtils).format(entry.getInitialValue())}">1</td>
                         <td th:text="${T(pk.test.exchange.util.BigDecimalUtils).format(entry.getTargetValue())}">27.63</td>
                         <td th:text="${#temporals.format(entry.getDate(), 'dd.MM.yyyy')}">12.06.2007</td>

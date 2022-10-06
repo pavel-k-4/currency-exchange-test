@@ -28,6 +28,7 @@ public class Currency {
     public String toSimpleString() {
         return "%s (%s)".formatted(charCode, name);
     }
+    public String getHint() { return "(%s)".formatted(name); }
 
     public String getId() {
         return id;
