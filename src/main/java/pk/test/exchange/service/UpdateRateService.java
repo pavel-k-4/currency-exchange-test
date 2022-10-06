@@ -1,6 +1,5 @@
 package pk.test.exchange.service;
 
-import generated.ValCurs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,6 +7,7 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+import pk.test.exchange.generated.ValCurs;
 import pk.test.exchange.model.Currency;
 import pk.test.exchange.model.Rate;
 import pk.test.exchange.repository.CurrencyRepository;
