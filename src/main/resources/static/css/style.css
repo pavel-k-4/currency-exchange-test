@@ -45,3 +45,7 @@ header {
         display: none;
     }
 }
+
+input.form-control[type="date"] {
+    display: inline-block;
+}
