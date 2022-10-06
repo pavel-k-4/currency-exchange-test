@@ -2,7 +2,7 @@ package pk.test.exchange.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "rate")
@@ -15,12 +15,12 @@ public class Rate {
     private Currency currency;
     private Long nominal;
     private BigDecimal value;
-    private Date date;
+    private LocalDate date;
 
     public Rate() {
     }
 
-    public Rate(Currency currency, long nominal, BigDecimal value, Date date) {
+    public Rate(Currency currency, long nominal, BigDecimal value, LocalDate date) {
         this.currency = currency;
         this.nominal = nominal;
         this.value = value;
@@ -59,11 +59,11 @@ public class Rate {
         this.value = value;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 }

@@ -12,7 +12,7 @@ import pk.test.exchange.service.ConvertService;
 import pk.test.exchange.service.UpdateRateService;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -52,10 +52,10 @@ public class ConvertServiceTest {
         dto.setInitialValue("1");
 
         when(rateRepository.findByCurrencyIdToday(dto.getInitialCurrency())).thenReturn(Optional.of(
-                new Rate(null, 1L, BigDecimal.valueOf(57), new Date()) //dollar
+                new Rate(null, 1L, BigDecimal.valueOf(57), LocalDate.now()) //dollar
         ));
         when(rateRepository.findByCurrencyIdToday(dto.getTargetCurrency())).thenReturn(Optional.of(
-                new Rate(null, 1L, BigDecimal.ONE, new Date()) //rub
+                new Rate(null, 1L, BigDecimal.ONE, LocalDate.now()) //rub
         ));
 
         assertThat(convertService.convert(dto)).isEqualTo(new BigDecimal("57.00"));
@@ -69,10 +69,10 @@ public class ConvertServiceTest {
         dto.setInitialValue("1");
 
         when(rateRepository.findByCurrencyIdToday(dto.getInitialCurrency())).thenReturn(Optional.of(
-                new Rate(null, 1L, new BigDecimal("57.1012"), new Date()) //dollar
+                new Rate(null, 1L, new BigDecimal("57.1012"), LocalDate.now()) //dollar
         ));
         when(rateRepository.findByCurrencyIdToday(dto.getTargetCurrency())).thenReturn(Optional.of(
-                new Rate(null, 10L, new BigDecimal("36.6002"), new Date()) //danish croon
+                new Rate(null, 10L, new BigDecimal("36.6002"), LocalDate.now()) //danish croon
         ));
 
         assertThat(convertService.convert(dto)).isEqualTo(new BigDecimal("15.60"));

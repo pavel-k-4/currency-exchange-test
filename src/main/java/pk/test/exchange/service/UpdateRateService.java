@@ -18,8 +18,9 @@ import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 @Service
 @Transactional
@@ -51,10 +52,10 @@ public class UpdateRateService {
         if (response == null) {
             throw new RestClientException("Object from " + url + " cannot be parsed, try rebuilding the app.");
         }
-        Date date;
+        LocalDate date;
         try {
-            date = new SimpleDateFormat("dd.MM.yyyy").parse(response.getDate());
-        } catch (ParseException e) {
+            date = LocalDate.parse(response.getDate(), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        } catch (DateTimeParseException e) {
             log.error("Cannot parse date {}", response.getDate(), e);
             throw new RestClientException("Object from " + url + " cannot be parsed, try rebuilding the app.");
         }
