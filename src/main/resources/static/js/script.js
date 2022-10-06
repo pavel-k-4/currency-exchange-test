@@ -5,13 +5,14 @@ const makeCall = async (dto, names) => {
     const response = await fetch("/convert", {
         method: 'POST',
         headers: {
+            'Accept': 'text/plain',
             'Content-Type': 'application/json',
             'X-CSRF-TOKEN': token
         },
         body: JSON.stringify(dto),
     });
 
-    response.json().then(data => {
+    response.text().then(data => {
         console.log(data);
         document.getElementById("target-val").value = data;
         let table = document.getElementById("history-table")

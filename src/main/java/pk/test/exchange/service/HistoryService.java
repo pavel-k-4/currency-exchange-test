@@ -23,7 +23,7 @@ public class HistoryService {
         this.currencyRepository = currencyRepository;
     }
 
-    public void log(ConvertDto dto, BigDecimal targetValue) {
+    public void write(ConvertDto dto, BigDecimal targetValue) {
         if (targetValue == null) {
             return;
         }

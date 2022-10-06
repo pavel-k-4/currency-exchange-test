@@ -45,3 +45,7 @@ div#button-convert:hover {
 input.error {
     background-color: pink;
 }
+
+th, td {
+    padding: 3px;
+}

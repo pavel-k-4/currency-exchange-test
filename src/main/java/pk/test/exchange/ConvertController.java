@@ -1,5 +1,7 @@
 package pk.test.exchange;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +16,7 @@ import javax.transaction.Transactional;
 @RestController
 public class ConvertController {
 
+    private static final Logger log = LoggerFactory.getLogger(ConvertController.class);
     private final ConvertService convertService;
     private final HistoryService historyService;
 
@@ -26,7 +29,8 @@ public class ConvertController {
     @Transactional
     public String convert(@RequestBody ConvertDto convertDto) {
         var targetValue = convertService.convert(convertDto);
-        historyService.log(convertDto, targetValue);
+        historyService.write(convertDto, targetValue);
+        log.info("Dto '{}' resulted in '{}'", convertDto, targetValue);
         return (targetValue != null) ? BigDecimalUtils.format(targetValue) : "";
     }
 }
