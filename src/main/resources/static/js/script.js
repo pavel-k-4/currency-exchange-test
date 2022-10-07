@@ -28,13 +28,15 @@ const makeConvertCall = async (dto, names) => {
             return;
         }
         document.getElementById("target-val").value = data;
-        let table = document.getElementById("history-table")
-        let row = table.insertRow(1);
-        row.insertCell(0).innerHTML = names.initialName
-        row.insertCell(1).innerHTML = names.targetName
-        row.insertCell(2).innerHTML = dto.initialValue
-        row.insertCell(3).innerHTML = data
-        row.insertCell(4).innerHTML = "только что"
+        if (document.getElementById("button-search-cancel").hidden) { // no ongoing search
+            let table = document.getElementById("history-table")
+            let row = table.insertRow(1);
+            row.insertCell(0).innerHTML = names.initialName
+            row.insertCell(1).innerHTML = names.targetName
+            row.insertCell(2).innerHTML = dto.initialValue
+            row.insertCell(3).innerHTML = data
+            row.insertCell(4).innerHTML = "только что"
+        }
     }, () => {
         showError();
     });
@@ -81,6 +83,19 @@ const convert = () => {
     }
 };
 
+const replaceRows = (dto) => {
+    let table = document.getElementById("history-table");
+    table.replaceChild(document.createElement('tbody'), table.lastElementChild);
+    dto.entries.forEach((entry) => {
+        let row = table.lastElementChild.insertRow(-1);
+        row.insertCell(0).innerHTML = `${entry.initialCurrency.code} <a class="curr-hint">${entry.initialCurrency.hint}</a>`;
+        row.insertCell(1).innerHTML = `${entry.targetCurrency.code} <a class="curr-hint">${entry.targetCurrency.hint}</a>`;
+        row.insertCell(2).innerHTML = entry.initialValue;
+        row.insertCell(3).innerHTML = entry.targetValue;
+        row.insertCell(4).innerHTML = entry.date;
+    })
+}
+
 const search = () => {
     let date = document.getElementById("search-date").value
     if (!date) {
@@ -89,6 +104,7 @@ const search = () => {
     makeSearchCall(date)
         .then((dto) => {
             console.log(dto);
+            replaceRows(dto)
             let cancel = document.getElementById("button-search-cancel")
             cancel.hidden = false
         })
@@ -101,6 +117,7 @@ const cancelSearch = () => {
     makeSearchCall()
         .then((dto) => {
             console.log(dto);
+            replaceRows(dto)
         })
         .then(() => activate())
 }

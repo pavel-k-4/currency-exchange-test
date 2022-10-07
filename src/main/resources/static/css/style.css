@@ -32,7 +32,7 @@ input.error {
 input, select {
     padding: 4px;
 }
-input {
+input[type="text"] {
     width: 100%;
     box-sizing: border-box;
 }
@@ -48,4 +48,13 @@ header {
 
 input.form-control[type="date"] {
     display: inline-block;
+    vertical-align: middle;
+}
+
+div#button-search, div#button-search-cancel {
+    margin-bottom: 0;
+}
+
+label[hidden] {
+    margin: 0;
 }
