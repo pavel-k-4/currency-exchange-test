@@ -1,6 +1,7 @@
 const activate = () => {
     document.getElementById("button-convert").onclick = convert;
     document.getElementById("button-search").onclick = search;
+    document.getElementById("button-search-cancel").onclick = cancelSearch;
 };
 function showError() {
     document.getElementById("target-val").value = "";
@@ -41,7 +42,13 @@ const makeConvertCall = async (dto, names) => {
 
 const makeSearchCall = async (date) => {
     const token = document.querySelector("meta[name='_csrf']").content;
-    const response = await fetch('/history?' + new URLSearchParams({ 'd': date }), {
+    let uri;
+    if (date) {
+        uri = '/history?' + new URLSearchParams({ 'd': date });
+    } else {
+        uri = '/history';
+    }
+    const response = await fetch(uri, {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
@@ -53,7 +60,7 @@ const makeSearchCall = async (date) => {
     return response.json()
 }
 
-function getSelectedText(id) {
+const getSelectedText = (id) => {
     let select = document.getElementById(id)
     return select.options[select.selectedIndex].text
 }
@@ -84,6 +91,16 @@ const search = () => {
             console.log(dto);
             let cancel = document.getElementById("button-search-cancel")
             cancel.hidden = false
+        })
+        .then(() => activate())
+}
+
+const cancelSearch = () => {
+    let cancel = document.getElementById("button-search-cancel")
+    cancel.hidden = true
+    makeSearchCall()
+        .then((dto) => {
+            console.log(dto);
         })
         .then(() => activate())
 }
