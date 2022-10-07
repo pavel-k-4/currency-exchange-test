@@ -10,7 +10,9 @@ import pk.test.exchange.repository.CurrencyRepository;
 import pk.test.exchange.repository.HistoryRepository;
 import pk.test.exchange.security.PostgresUserDetails;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import static java.util.stream.Collectors.toMap;
 
@@ -28,8 +30,8 @@ public class IndexController {
     @GetMapping("/")
     public String index(Model model) {
 
-        var currencies = currencyRepository.findAll().stream().collect(toMap(
-                Currency::getId, Currency::toSimpleString
+        Map<String, String> currencies = currencyRepository.findAll().stream().collect(toMap(
+                Currency::getId, Currency::toSimpleString, (x, y) -> y, LinkedHashMap::new
         ));
         model.addAttribute("currencies", currencies);
 

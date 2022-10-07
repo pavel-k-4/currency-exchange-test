@@ -31,11 +31,13 @@ const makeConvertCall = async (dto, names) => {
         if (document.getElementById("button-search-cancel").hidden) { // no ongoing search
             let table = document.getElementById("history-table")
             let row = table.insertRow(1);
-            row.insertCell(0).innerHTML = names.initialName
-            row.insertCell(1).innerHTML = names.targetName
-            row.insertCell(2).innerHTML = dto.initialValue
-            row.insertCell(3).innerHTML = data
-            row.insertCell(4).innerHTML = "только что"
+            let initialCurrency = splitHint(names.initialName);
+            let targetCurrency = splitHint(names.targetName);
+            row.insertCell(0).innerHTML = `${initialCurrency.code} <a class="curr-hint">(${initialCurrency.hint})</a>`;
+            row.insertCell(1).innerHTML = `${targetCurrency.code} <a class="curr-hint">(${targetCurrency.hint})</a>`;
+            row.insertCell(2).innerHTML = dto.initialValue;
+            row.insertCell(3).innerHTML = data;
+            row.insertCell(4).innerHTML = "только что";
         }
     }, () => {
         showError();
@@ -82,6 +84,16 @@ const convert = () => {
         activate()
     }
 };
+
+const splitHint = (str) => {
+    let code = str.substring(0, str.indexOf('('));
+    let rest = str.substring(str.indexOf('(') + 1);
+    let hint = rest.substring(0, rest.lastIndexOf(')'));
+    return {
+        'code': code,
+        'hint': hint
+    }
+}
 
 const replaceRows = (dto) => {
     let table = document.getElementById("history-table");
