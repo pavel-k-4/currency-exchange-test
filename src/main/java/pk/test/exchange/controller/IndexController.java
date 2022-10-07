@@ -1,4 +1,4 @@
-package pk.test.exchange;
+package pk.test.exchange.controller;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;

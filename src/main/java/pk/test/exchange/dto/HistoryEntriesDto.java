@@ -3,6 +3,7 @@ package pk.test.exchange.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("unused")
 public class HistoryEntriesDto {
     private List<HistoryEntryDto> entries = new ArrayList<>();
 

@@ -1,4 +1,4 @@
-package pk.test.exchange;
+package pk.test.exchange.controller;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
