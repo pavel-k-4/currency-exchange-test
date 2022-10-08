@@ -76,12 +76,12 @@
                 <tbody>
                     <tr th:each="entry : ${history}">
                         <td>
-                            <a th:text="${entry.getInitialCurrency().getCharCode()}">USD</a>
-                            <a th:text="${entry.getInitialCurrency().getHint()}" class="curr-hint">(Доллар США)</a>
+                            <span th:text="${entry.getInitialCurrency().getCharCode()}">USD</span>
+                            <span th:text="${entry.getInitialCurrency().getHint()}" class="curr-hint">(Доллар США)</span>
                         </td>
                         <td>
-                            <a th:text="${entry.getTargetCurrency().getCharCode()}">RUB</a>
-                            <a th:text="${entry.getTargetCurrency().getHint()}" class="curr-hint">(Российский рубль)</a>
+                            <span th:text="${entry.getTargetCurrency().getCharCode()}">RUB</span>
+                            <span th:text="${entry.getTargetCurrency().getHint()}" class="curr-hint">(Российский рубль)</span>
                         </td>
                         <td th:text="${T(pk.test.exchange.util.BigDecimalUtils).format(entry.getInitialValue())}">1</td>
                         <td th:text="${T(pk.test.exchange.util.BigDecimalUtils).format(entry.getTargetValue())}">27.63</td>

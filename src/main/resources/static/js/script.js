@@ -33,8 +33,8 @@ const makeConvertCall = async (dto, names) => {
             let row = table.insertRow(1);
             let initialCurrency = splitHint(names.initialName);
             let targetCurrency = splitHint(names.targetName);
-            row.insertCell(0).innerHTML = `${initialCurrency.code} <a class="curr-hint">(${initialCurrency.hint})</a>`;
-            row.insertCell(1).innerHTML = `${targetCurrency.code} <a class="curr-hint">(${targetCurrency.hint})</a>`;
+            row.insertCell(0).innerHTML = `${initialCurrency.code} <span class="curr-hint">(${initialCurrency.hint})</span>`;
+            row.insertCell(1).innerHTML = `${targetCurrency.code} <span class="curr-hint">(${targetCurrency.hint})</span>`;
             row.insertCell(2).innerHTML = dto.initialValue;
             row.insertCell(3).innerHTML = data;
             row.insertCell(4).innerHTML = "только что";
@@ -100,8 +100,8 @@ const replaceRows = (dto) => {
     table.replaceChild(document.createElement('tbody'), table.lastElementChild);
     dto.entries.forEach((entry) => {
         let row = table.lastElementChild.insertRow(-1);
-        row.insertCell(0).innerHTML = `${entry.initialCurrency.code} <a class="curr-hint">${entry.initialCurrency.hint}</a>`;
-        row.insertCell(1).innerHTML = `${entry.targetCurrency.code} <a class="curr-hint">${entry.targetCurrency.hint}</a>`;
+        row.insertCell(0).innerHTML = `${entry.initialCurrency.code} <span class="curr-hint">${entry.initialCurrency.hint}</span>`;
+        row.insertCell(1).innerHTML = `${entry.targetCurrency.code} <span class="curr-hint">${entry.targetCurrency.hint}</span>`;
         row.insertCell(2).innerHTML = entry.initialValue;
         row.insertCell(3).innerHTML = entry.targetValue;
         row.insertCell(4).innerHTML = entry.date;
