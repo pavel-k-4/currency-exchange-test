@@ -7,15 +7,15 @@
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.2/css/bootstrap.min.css} "/>
 </head>
 <body>
+    <header>
+    </header>
     <div class="container">
-        <div th:if="${param.error}">
-			Invalid username and password.</div>
-		<div th:if="${param.logout}">
-			You have been logged out.</div>
+        <div th:if="${param.error}" class="alert alert-danger">Некорректные имя пользователя или пароль.</div>
+		<div th:if="${param.logout}" class="alert alert-info">Вы успешно вышли из системы.</div>
         <form class="" method="post" action="#" th:action="@{/login}">
             <h2 class="">Вход</h2>
             <p>
-                <label for="username" class="">Username</label>
+                <label for="username" class="" hidden>Username</label>
                 <input type="text"
                        id="username"
                        name="username"
@@ -24,7 +24,7 @@
                        required="" autofocus="">
             </p>
             <p>
-                <label for="password" class="">Password</label>
+                <label for="password" class="" hidden>Password</label>
                 <input type="password"
                        id="password"
                        name="password"
@@ -33,6 +33,7 @@
                        required="">
             </p>
             <button class="btn btn-lg btn-primary" type="submit">Войти</button>
+            <a class="btn btn-lg btn-outline-primary" th:href="@{/register}">Регистрация</a>
         </form>
     </div>
 
