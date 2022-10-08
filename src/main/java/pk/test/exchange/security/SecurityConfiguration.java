@@ -16,7 +16,12 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests((authorize) -> authorize
-                    .antMatchers("/webjars/**", "/css/**", "/js/**").permitAll()
+                    .antMatchers(
+                            "/webjars/**",
+                            "/css/**",
+                            "/js/**",
+                            "/register"
+                    ).permitAll()
                     .anyRequest().authenticated()
             )
             .formLogin((form) -> form
