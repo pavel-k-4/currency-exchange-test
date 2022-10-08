@@ -25,6 +25,9 @@ public class BigDecimalUtils {
     }
 
     public static BigDecimal parse(String source) throws ParseException {
+        if (source.indexOf('.') != -1) {
+            return (BigDecimal) fromCbr.parse(source.replace('.', ','));
+        }
         return (BigDecimal) fromCbr.parse(source);
     }
 

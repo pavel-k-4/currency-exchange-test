@@ -29,6 +29,14 @@ public class ConvertService {
 
     @Nullable
     public BigDecimal convert(ConvertDto convertDto) {
+        BigDecimal value;
+        try {
+            value = BigDecimalUtils.parse(convertDto.getInitialValue());
+        } catch (ParseException e) {
+            log.warn("couldn't parse {} as number", convertDto.getInitialValue());
+            return null;
+        }
+
         Optional<Rate> initial = rateRepository.findByCurrencyIdToday(convertDto.getInitialCurrency());
         Optional<Rate> target = rateRepository.findByCurrencyIdToday(convertDto.getTargetCurrency());
 
@@ -43,14 +51,6 @@ public class ConvertService {
             log.error("could not find today's rates for {} and {} even after retry",
                     convertDto.getInitialCurrency(),
                     convertDto.getTargetCurrency());
-            return null;
-        }
-
-        BigDecimal value;
-        try {
-            value = BigDecimalUtils.parse(convertDto.getInitialValue());
-        } catch (ParseException e) {
-            log.warn("couldn't parse {}", convertDto.getInitialValue(), e);
             return null;
         }
 

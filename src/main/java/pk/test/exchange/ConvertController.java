@@ -12,6 +12,7 @@ import pk.test.exchange.service.HistoryService;
 import pk.test.exchange.util.BigDecimalUtils;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 @RestController
 public class ConvertController {
@@ -27,7 +28,7 @@ public class ConvertController {
 
     @PostMapping(value = "/convert", produces = MediaType.TEXT_PLAIN_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     @Transactional
-    public String convert(@RequestBody ConvertDto convertDto) {
+    public String convert(@RequestBody @Valid ConvertDto convertDto) {
         var targetValue = convertService.convert(convertDto);
         historyService.write(convertDto, targetValue);
         log.info("Dto '{}' resulted in '{}'", convertDto, targetValue);

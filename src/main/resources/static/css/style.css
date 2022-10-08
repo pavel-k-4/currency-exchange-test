@@ -46,6 +46,12 @@ header {
     }
 }
 
+@media (min-width: 800px) {
+    th.nowrap {
+        white-space: nowrap;
+    }
+}
+
 input.form-control[type="date"] {
     display: inline-block;
     vertical-align: middle;

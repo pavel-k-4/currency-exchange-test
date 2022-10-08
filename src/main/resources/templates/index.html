@@ -6,7 +6,7 @@
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <title>Конвертер</title>
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css(v=${#dates.createNow()})}">
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.2/css/bootstrap.min.css} "/>
 </head>
 <body>
     <header></header>
@@ -66,10 +66,10 @@
             <table id="history-table" class="table table-bordered table-hover">
                 <thead class="thead-light">
                     <tr>
-                        <th nowrap>Исходная валюта</th>
-                        <th nowrap>Целевая валюта</th>
-                        <th nowrap>Исходная сумма</th>
-                        <th nowrap>Целевая сумма</th>
+                        <th class="nowrap">Исходная валюта</th>
+                        <th class="nowrap">Целевая валюта</th>
+                        <th class="nowrap">Исходная сумма</th>
+                        <th class="nowrap">Целевая сумма</th>
                         <th>Дата</th>
                     </tr>
                 </thead>
@@ -92,8 +92,7 @@
         </section>
     </main>
     <script th:src="@{/js/script.js(v=${#dates.createNow()})}"></script>
-    <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
-    <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
-    <script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/1.16.0/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.6.2/js/bootstrap.min.js}"></script>
     </body>
 </html>
