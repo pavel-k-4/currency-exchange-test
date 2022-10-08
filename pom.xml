@@ -55,6 +55,12 @@
 			<groupId>org.webjars</groupId>
 			<artifactId>bootstrap</artifactId>
 			<version>4.6.2</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.webjars</groupId>
+					<artifactId>jquery</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
