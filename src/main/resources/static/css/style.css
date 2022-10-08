@@ -64,3 +64,9 @@ div#button-search, div#button-search-cancel {
 label[hidden] {
     margin: 0;
 }
+
+.logout-form form button {
+    margin-left: auto;
+    margin-right: 0;
+    vertical-align: middle;
+}
