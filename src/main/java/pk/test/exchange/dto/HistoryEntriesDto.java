@@ -1,17 +1,37 @@
 package pk.test.exchange.dto;
 
+import pk.test.exchange.model.History;
+import pk.test.exchange.util.BigDecimalUtils;
+
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("unused")
 public class HistoryEntriesDto {
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+
     private List<HistoryEntryDto> entries = new ArrayList<>();
 
     public HistoryEntriesDto() {
     }
 
-    public HistoryEntriesDto(List<HistoryEntryDto> entries) {
-        this.entries = entries;
+    public HistoryEntriesDto(List<History> history) {
+        entries = history.stream().map(entry ->
+                new HistoryEntriesDto.HistoryEntryDto(
+                        new HistoryEntriesDto.HistoryEntryDto.CurrencyDto(
+                                entry.getInitialCurrency().getCharCode(),
+                                entry.getInitialCurrency().getHint()
+                        ),
+                        new HistoryEntriesDto.HistoryEntryDto.CurrencyDto(
+                                entry.getTargetCurrency().getCharCode(),
+                                entry.getTargetCurrency().getHint()
+                        ),
+                        BigDecimalUtils.format(entry.getInitialValue()),
+                        BigDecimalUtils.format(entry.getTargetValue()),
+                        formatter.format(entry.getDate())
+                )
+        ).toList();
     }
 
     public static class HistoryEntryDto {

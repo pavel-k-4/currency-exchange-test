@@ -11,7 +11,6 @@ import pk.test.exchange.model.User;
 import pk.test.exchange.repository.CurrencyRepository;
 import pk.test.exchange.repository.HistoryRepository;
 import pk.test.exchange.security.PostgresUserDetails;
-import pk.test.exchange.util.BigDecimalUtils;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
@@ -23,7 +22,6 @@ import java.util.List;
 @Transactional
 public class HistoryService {
 
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
     private final HistoryRepository historyRepository;
     private final CurrencyRepository currencyRepository;
 
@@ -48,7 +46,7 @@ public class HistoryService {
 
     public HistoryEntriesDto generateForCurrentUser() {
         List<History> history = historyRepository.findAllByUserOrderByDateDesc(getCurrentUser());
-        return transformToDto(history);
+        return new HistoryEntriesDto(history);
     }
 
     public HistoryEntriesDto generateForCurrentUserAndDate(String d) {
@@ -58,26 +56,7 @@ public class HistoryService {
                 currentUser,
                 date
         );
-        return transformToDto(history);
-    }
-
-    private HistoryEntriesDto transformToDto(List<History> history) {
-        var entryDtos = history.stream().map(entry ->
-                new HistoryEntriesDto.HistoryEntryDto(
-                        new HistoryEntriesDto.HistoryEntryDto.CurrencyDto(
-                                entry.getInitialCurrency().getCharCode(),
-                                entry.getInitialCurrency().getHint()
-                        ),
-                        new HistoryEntriesDto.HistoryEntryDto.CurrencyDto(
-                                entry.getTargetCurrency().getCharCode(),
-                                entry.getTargetCurrency().getHint()
-                        ),
-                        BigDecimalUtils.format(entry.getInitialValue()),
-                        BigDecimalUtils.format(entry.getTargetValue()),
-                        formatter.format(entry.getDate())
-                )
-        ).toList();
-        return new HistoryEntriesDto(entryDtos);
+        return new HistoryEntriesDto(history);
     }
 
     private User getCurrentUser() {
