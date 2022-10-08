@@ -9,7 +9,13 @@
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.2/css/bootstrap.min.css} "/>
 </head>
 <body>
-    <header></header>
+    <header>
+        <section class="form-group logout-form">
+            <form class="" method="post" action="#" th:action="@{/logout}">
+            <button class="btn btn-sm btn-outline-primary float-right" type="submit">Выход</button>
+        </form>
+        </section>
+    </header>
     <main>
         <section class="form-group">
             <h1>Конвертер</h1>
