@@ -129,7 +129,7 @@ const cancelSearch = () => {
     makeSearchCall()
         .then((dto) => {
             console.log(dto);
-            replaceRows(dto)
+            replaceRows(dto);
         })
         .then(() => activate())
 }

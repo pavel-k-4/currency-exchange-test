@@ -3,6 +3,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+src/main/java/**/generated/
 src/main/resources/xsd/*.xsd
 src/main/resources/application-prod.properties
 

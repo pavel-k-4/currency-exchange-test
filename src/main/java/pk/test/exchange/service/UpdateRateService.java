@@ -11,6 +11,7 @@ import pk.test.exchange.generated.ValCurs;
 import pk.test.exchange.model.Currency;
 import pk.test.exchange.model.Rate;
 import pk.test.exchange.repository.CurrencyRepository;
+import pk.test.exchange.repository.DateRepository;
 import pk.test.exchange.repository.RateRepository;
 import pk.test.exchange.util.BigDecimalUtils;
 
@@ -33,14 +34,16 @@ public class UpdateRateService {
     private final RestTemplate restTemplate;
     private final CurrencyRepository currencyRepository;
     private final RateRepository rateRepository;
+    private final DateRepository dateRepository;
 
     public UpdateRateService(RestTemplateBuilder restTemplateBuilder,
                              CurrencyRepository currencyRepository,
-                             RateRepository rateRepository
-    ) {
+                             RateRepository rateRepository,
+                             DateRepository dateRepository) {
         this.restTemplate = restTemplateBuilder.build();
         this.currencyRepository = currencyRepository;
         this.rateRepository = rateRepository;
+        this.dateRepository = dateRepository;
     }
 
     @PostConstruct
@@ -53,13 +56,15 @@ public class UpdateRateService {
         if (response == null) {
             throw new RestClientException("Object from " + url + " cannot be parsed, try rebuilding the app.");
         }
-        LocalDate date;
+        final LocalDate xmlDate;
         try {
-            date = LocalDate.parse(response.getDate(), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+            xmlDate = LocalDate.parse(response.getDate(), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         } catch (DateTimeParseException e) {
             log.error("Cannot parse date {}", response.getDate(), e);
             throw new RestClientException("Object from " + url + " cannot be parsed, try rebuilding the app.");
         }
+        final LocalDate dbDate = dateRepository.getDate();
+        final LocalDate date = (xmlDate.isBefore(dbDate)) ? dbDate : xmlDate;
         List<Rate> incomingRates = response.getValute().stream().map(currencyRate -> {
             var currency = currencyRepository.findById(currencyRate.getID()).orElseGet(() ->
                     currencyRepository.save(new Currency(
