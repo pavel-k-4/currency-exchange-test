@@ -33,4 +33,4 @@ CREATE TABLE IF NOT EXISTS "history" (
     "date" TIMESTAMP NOT NULL DEFAULT NOW()
 );
 CREATE INDEX idx_history_by_user ON "history" USING HASH ("user_id");
-CREATE INDEX idx_history_by_date ON "history"("date");
+CREATE INDEX idx_history_by_date_and_time ON "history"("date");
