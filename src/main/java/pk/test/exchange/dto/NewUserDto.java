@@ -14,7 +14,6 @@ public class NewUserDto {
     private String password;
 
     @NotNull
-    @NotEmpty
     private String matchingPassword;
 
     public String getUsername() {

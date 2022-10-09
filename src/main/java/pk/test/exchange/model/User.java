@@ -1,7 +1,6 @@
 package pk.test.exchange.model;
 
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.client.HttpClientErrorException;
 import pk.test.exchange.security.PostgresUserDetails;
 
 import javax.persistence.*;
@@ -16,15 +15,23 @@ public class User {
     private String username;
     private String password;
 
+    public User() {
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public UserDetails toUserDetails() {
         return new PostgresUserDetails(id, username, password);
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
