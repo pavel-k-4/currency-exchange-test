@@ -10,11 +10,6 @@ div.action-line {
 div.action-line div.action div:first-child {
     margin-bottom: 8px;
 }
-body {
-    min-width: 500px;
-    max-width: 1200px!important;
-    margin: auto!important;
-}
 
 main {
     margin: 5px 0 10px;
