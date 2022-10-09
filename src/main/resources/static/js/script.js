@@ -116,9 +116,9 @@ const search = () => {
     makeSearchCall(date)
         .then((dto) => {
             console.log(dto);
-            replaceRows(dto)
-            let cancel = document.getElementById("button-search-cancel")
-            cancel.hidden = false
+            replaceRows(dto);
+            let cancel = document.getElementById("button-search-cancel");
+            cancel.hidden = false;
         })
         .then(() => activate())
 }
