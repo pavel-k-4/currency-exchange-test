@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import pk.test.exchange.dto.NewUserDto;
+import pk.test.exchange.service.UserService;
 
 import javax.validation.Valid;
 
@@ -16,6 +17,13 @@ import javax.validation.Valid;
 public class AuthController {
 
     private static final Logger log = LoggerFactory.getLogger(AuthController.class);
+
+    private final UserService userService;
+
+    public AuthController(UserService userService) {
+        this.userService = userService;
+    }
+
     @GetMapping("/login")
     public String login() {
         return "login";
@@ -30,8 +38,13 @@ public class AuthController {
 
     @PostMapping(value = "/register")
     public String register(Model model, @Valid @ModelAttribute("dto") NewUserDto dto) {
-        model.addAttribute("success", true);
-        log.info("New user registration attempt: {}", dto);
+        userService.createUser(dto).ifPresentOrElse((error) -> {
+                model.addAttribute("error", error.getExplanation());
+                model.addAttribute("success", false);
+        }, () ->
+                model.addAttribute("success", true)
+        );
         return "register";
     }
+
 }

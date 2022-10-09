@@ -10,8 +10,9 @@
     <header>
     </header>
     <div class="container" th:unless="${success}">
-        <div th:if="${param.error}" class="alert alert-danger">Имя пользователя уже занято.</div>
-        <div th:if="${param.error}" class="alert alert-danger">Подтверждение пароля не совпадает с паролем.</div>
+        <div th:if="${error}" th:text="${error}" class="alert alert-danger">
+            Имя пользователя уже занято.
+        </div>
         <form class="" method="post" action="#" th:action="@{/register}" th:object="${dto}">
             <h2 class="">Вход</h2>
             <p>
