@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css(v=${#dates.createNow()})}">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.2/css/bootstrap.min.css} "/>
+</head>
+<body>
+    <header>
+    </header>
+    <div class="container" th:unless="${success}">
+        <div th:if="${param.error}" class="alert alert-danger">Имя пользователя уже занято.</div>
+        <div th:if="${param.error}" class="alert alert-danger">Подтверждение пароля не совпадает с паролем.</div>
+        <form class="" method="post" action="#" th:action="@{/register}" th:object="${dto}">
+            <h2 class="">Вход</h2>
+            <p>
+                <label for="username" class="" hidden>Username</label>
+                <input type="text"
+                       id="username"
+                       name="username"
+                       th:field="*{username}"
+                       class="form-control"
+                       placeholder="Имя пользователя"
+                       required="" autofocus="">
+            </p>
+            <p>
+                <label for="password" class="" hidden>Password</label>
+                <input type="password"
+                       id="password"
+                       name="password"
+                       th:field="*{password}"
+                       class="form-control"
+                       placeholder="Пароль"
+                       required="">
+            </p>
+            <p>
+                <label for="matchingPassword" class="" hidden>Password Confirmation</label>
+                <input type="password"
+                       id="matchingPassword"
+                       name="matchingPassword"
+                       th:field="*{matchingPassword}"
+                       class="form-control"
+                       placeholder="Подтверждение пароля"
+                       required="">
+            </p>
+            <button class="btn btn-lg btn-primary" type="submit">Зарегистрироваться</button>
+            <a class="btn btn-lg btn-outline-primary" th:href="@{/login}">Вход</a>
+        </form>
+    </div>
+    <div class="container" th:if="${success}">
+        <div class="alert alert-primary">Вы успешно зарегистрированы!</div>
+        <a class="btn btn-lg btn-outline-primary" th:href="@{/login}">Вход</a>
+    </div>
+
+    <script th:src="@{/webjars/popper.js/1.16.0/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.6.2/js/bootstrap.min.js}"></script>
+</body>
+</html>
